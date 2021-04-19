@@ -1,0 +1,248 @@
+-----------------Listar Puestos Alfabeticamente ---------------------
+
+CREATE PROC SP_ListarPuesto
+AS
+SELECT * FROM Puesto WHERE Activo = 1
+ORDER BY Nombre 
+
+Esto no va, es para que lo pruebe si quiere (EXECUTE SP_ListarPuesto)
+
+
+
+
+
+-----------------Modificar Nombre y Salario Puesto ---------------------
+
+CREATE PROC SP_ModificarPuesto
+@Id int ,
+@Nombre Varchar(40),
+@SalarioXHora int 
+AS
+UPDATE Puesto SET SalarioXHora = @SalarioXHora
+WHERE Id = @Id AND Activo = 1
+UPDATE Puesto SET Nombre = @Nombre
+WHERE Id = @Id AND Activo = 1
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarPuesto 3,'Administrador',1200)
+
+
+
+
+
+
+-----------------Modificar Nombre Puesto ---------------------------
+
+
+CREATE PROC SP_ModificarNombrePuesto
+@Id int ,
+@Nombre Varchar(40)
+AS
+UPDATE Puesto SET Nombre = @Nombre
+WHERE Id = @Id AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarNombrePuesto 1,'Administrador')
+
+
+
+
+
+
+-----------------Modificar Salario Puesto ---------------------------
+
+
+CREATE PROC SP_ModificarSalarioPuesto
+@Id int ,
+@SalarioXHora int 
+AS
+UPDATE Puesto SET SalarioXHora = @SalarioXHora
+WHERE Id = @Id AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarSalarioPuesto  3,600) 
+
+
+
+
+-------------------------- Insertar Puesto ---------------------------
+
+
+CREATE PROC SP_InsertarPuesto
+@Nombre Varchar (40),
+@SalarioXHora int,
+@Activo int
+AS
+INSERT INTO Puesto VALUES(@Nombre,@SalarioXHora,@Activo)
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_InsertarPuesto 'Contador',1500)
+
+
+
+
+------------------------ Listar Empleados ----------------------------- 
+
+CREATE PROC SP_ListarEmpleado
+AS
+SELECT * FROM Empleado WHERE Activo = 1
+ORDER BY Nombre 
+
+
+
+Esto no va, es para que lo pruebe si quiere (EXECUTE SP_ListarEmpleado)
+
+
+
+
+------------------------ Listar Empleado Filtro -----------------------
+
+CREATE PROC SP_ListarEmpleadoFiltro
+@Nombre Varchar(40)
+AS
+SELECT * FROM Empleado WHERE Nombre = @Nombre AND Activo = 1
+ORDER BY Nombre 
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ListarEmpleadoFiltro 'Conde')
+
+
+
+-----------------------Modificar Empleado ----------------------------
+
+CREATE PROC SP_ModificarEmpleado
+@Nombre Varchar (40),
+@IdPuesto int ,
+@IdDepartamento int,
+@ValorDocumentoIdentificacion int,
+@FechaDeNacimiento Date
+AS
+UPDATE Empleado SET  IdPuesto = @IdPuesto
+WHERE Nombre = @Nombre AND Activo = 1
+UPDATE Empleado SET IdDepartamento = @IdDepartamento
+WHERE Nombre = @Nombre AND Activo = 1
+UPDATE Empleado SET  ValorDocumentoIdentificacion = @ValorDocumentoIdentificacion
+WHERE Nombre = @Nombre AND Activo = 1
+UPDATE Empleado SET FechaDeNacimiento = @FechaDeNacimiento
+WHERE Nombre = @Nombre AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarEmpleado 'Francisco',2,3,133333,'2000-06-26')
+
+
+
+------------------------Modificar Nombre Empleado ---------------------------
+
+
+
+CREATE PROC SP_ModificarNombreEmpleado
+@NombreActual Varchar(40),
+@Nombre Varchar (40)
+AS
+UPDATE Empleado SET  Nombre = @Nombre
+WHERE Nombre = @NombreActual AND Activo = 1
+
+Esto no va, es para que lo pruebe si quiere ( EXEC SP_ModificarNombreEmpleado 'Francisco','Julian' )
+
+
+
+
+------------------------- Modificar Puesto Empleado ---------------------------
+
+
+CREATE PROC SP_ModificarPuestoEmpleado
+@Nombre Varchar (40),
+@IdPuesto int 
+AS
+UPDATE Empleado SET  IdPuesto = @IdPuesto
+WHERE Nombre = @Nombre AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarPuestoEmpleado 'Julian',3)
+
+
+
+---------------------- Modificar Departamento Empleado ---------------------------
+
+
+CREATE PROC SP_ModificarDepartamentoEmpleado
+@Nombre Varchar (40),
+@IdDepartamento int 
+AS
+UPDATE Empleado SET  IdDepartamento = @IdDepartamento
+WHERE Nombre = @Nombre AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarDepartamentoEmpleado 'julian',1)
+
+
+
+----------------------- Modificar Valor Documento Empleado ------------------------------
+
+CREATE PROC SP_ModificarValorDocumentoEmpleado
+@Nombre Varchar (40),
+@ValorDocumentoIdentificacion int 
+AS
+UPDATE Empleado SET  ValorDocumentoIdentificacion = @ValorDocumentoIdentificacion
+WHERE Nombre = @Nombre AND Activo = 1
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_ModificarValorDocumentoEmpleado 'Julian', 122222)
+
+
+----------------------- Modificar Nacimiento Empleado ------------------------------------
+
+
+CREATE PROC SP_ModificarNacimientoEmpleado
+@Nombre Varchar (40),
+@FechaDeNacimiento DATE
+AS
+UPDATE Empleado SET  FechaDeNacimiento = @FechaDeNacimiento
+WHERE Nombre = @Nombre AND Activo = 1
+
+Esto no va, es para que lo pruebe si quiere ( EXEC SP_ModificarNacimientoEmpleado 'Julian','2000-01-01')
+
+
+--------------------- Insertar un Nuevo Empleado ------------------------------------------
+
+
+CREATE PROC SP_InsertarEmpleado
+@IdPuesto int,
+@IdDepartamento int,
+@ValorDocumentoIdentificacion int,
+@Nombre Varchar (40),
+@FechaDeNacimiento Date,
+@Activo int
+AS
+INSERT INTO Empleado VALUES(@IdPuesto,@IdDepartamento,@ValorDocumentoIdentificacion,@Nombre,@FechaDeNacimiento,@Activo)
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_InsertarEmpleado  1,2,231231,'Kristel','2001-03-17',1)
+
+
+
+--------------------- Eliminar Puesto -----------------------------------------------------
+
+
+CREATE PROC SP_EliminarPuesto
+@Id int ,
+@Activo int
+AS
+UPDATE Puesto SET Activo = @Activo
+WHERE Id = @Id AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_EliminarPuesto 2,0)
+
+
+----------------------- Eliminar Empleado -------------------------------------------------
+
+
+
+CREATE PROC SP_EliminarEmpleado
+@Nombre Varchar (40),
+@Activo int
+AS
+UPDATE Empleado SET  Activo = @Activo
+WHERE Nombre = @Nombre AND Activo = 1
+
+
+Esto no va, es para que lo pruebe si quiere (EXEC SP_EliminarEmpleado Julian,0)
