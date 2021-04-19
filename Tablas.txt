@@ -1,0 +1,44 @@
+CREATE TABLE TipoDeDocumento
+( 
+Id int primary key identity, -- Id del documento
+Nombre Varchar( 50 ), -- Nombre del documento
+);
+
+
+CREATE TABLE Puesto
+( 
+Id int primary key identity, -- Id del puesto
+Nombre Varchar( 50 ), -- nombre del puesto
+SalarioXHora Varchar( 10), -- salario por hora del puesto 
+);
+
+
+CREATE TABLE Departamento 
+( 
+Id int primary key identity, -- Id del departamento
+Nombre Varchar(50), -- Nombre del departamento
+);
+
+
+Create table Empleado
+(
+IdPuesto int, --Id del puesto del empleado
+IdDepartamento int, -- Departamento del empleado 
+ValorDocumentoIdentificacion int, -- valor de la identificacion del empleado
+Nombre Varchar(50), -- Nombre del empleado
+FechaDeNacimiento Date, -- Fecha de nacimiento 
+
+CONSTRAINT FK_IdPuesto FOREIGN KEY (IdPuesto) REFERENCES Puesto(Id), 
+CONSTRAINT FK_IdDepartamento FOREIGN KEY (IdDepartamento) REFERENCES Departamento(Id),
+CONSTRAINT PK_Nombre PRIMARY KEY ( Nombre)
+);
+
+
+Create table Usuario(
+Nombre Varchar(50), -- Nombre del usuario
+Contrasenia Varchar( 20 ), -- Contrasenia para entrar como administrador 
+Tipo int, -- Tipo de documento 
+
+CONSTRAINT FK_Tipo FOREIGN KEY (Tipo) REFERENCES TipoDeDocumento(Id),
+CONSTRAINT pk_Usuario PRIMARY KEY ( Nombre )
+);
